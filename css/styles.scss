@@ -1,0 +1,107 @@
+
+// Colors, vars
+	$body_color: #FFF;
+	$elev_shaft_color: #CCC;
+	$elev_free_color: #0F9;
+	$elev_busy_color: #D99;
+
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background: $body_color;
+}
+
+#container_buildings {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.building {
+	// height: 50vh; // Height can be defined by JS -> template.
+	margin: 10px auto;
+	padding: 10px;
+	background: #DDD;
+	border: 1px solid gray;
+	display:block;
+}
+
+@media (min-width: 892px) {
+	.building {
+		// max-width: 45%;
+	}
+}
+
+.building_main {
+	/* Flexbox Container */
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.elevator_shaft {
+	background: $elev_shaft_color;
+	border: 1px dashed gray;
+	height: 100%;
+	// width requires JS; defined in style="" of template.
+	max-width: 40%; // Aesthetically, this would be too big.
+	min-width: 100px;
+
+	position: relative;
+
+	/* Flexbox children (and container?) */
+	display: flex;
+	// flex-grow: 1;
+	align-self: flex-end; // Align to the bottom ground floor.
+
+}
+
+.elevator_car {
+	position: absolute;
+	bottom: 0; // Start on the ground floor.
+	width: 100%;
+	// height: 5vh; // Now in JS -> template.
+	background: white;
+	border: 1px solid black;
+
+	text-align: center;
+	padding: 5px;
+	cursor: pointer;
+
+	// display: flex;
+
+	&.free {
+		background: $elev_free_color;
+	}
+	&.busy {
+		background: $elev_busy_color;
+	}
+}
+
+.waiting_area {
+	background: white;
+	color: black;
+	border: 1px solid green;
+	padding: 5px;
+	position: relative;
+
+	// Flexbox stuff.
+	display: flex;
+	align-selft: flex-end;
+	// flex-grow: 2;
+}
+.waiting_area_people {
+	position: relative;
+	width: 100%;
+	align-self: flex-end;
+
+	.personal-icon {
+		position: absolute;
+		font-size: 1.25rem;
+		bottom: 0;
+	}
+}
+
+.building_requests {
+	padding: 10px 0;
+}

@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html ng-app="elevatorMaster">
+	<head>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap.css" />
+		<link rel="stylesheet" type="text/css" href="/css/font-awesome-4.6.3/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="/css/styles.css" />
+		<script type="text/javascript" src="/js/vendor/angular.min.js"></script>
+		<script type="text/javascript" src="/js/app.js"></script>
+		<script type="text/javascript" src="/js/vendor/jquery.js"></script>
+		<script type="text/javascript" src="/js/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/js/custom/misc.js"></script>
+
+	</head>
+
+	<body ng-controller="SimulationController as objSim">
+
+		<div class="container-fluid">
+			<div class="row clearfix">
+				<div class="col-md-12">
+					<h1 class="heading_text">Elevator Distribution Simulator</h1>
+					<p>
+						Let's examine how elevators work, and what algorithms work best in certain
+						situations!
+					</p>
+				</div>
+			</div>
+			<div class="row clearfix">	
+				<div class="col-md-12" id="container_buildings">
+					<div data-ng-repeat="objBuilding in objSim.buildings"
+					class="building">
+						<h3>{{objBuilding.name}}</h3><br/>
+						<div class="building_main" style="height:{{objBuilding.building_height}}px;">
+							<section class="elevator_shaft" data-ng-repeat="elevator in objBuilding.elevators"
+							style="width:{{70 / objBuilding.elevators.length}}%;">
+								<div id="{{objBuilding.name}}_{{elevator.name}}" class="elevator_car"
+								data-ng-click="objBuilding.distribute_requests();"
+								style="height:{{objBuilding.car_height}}px;">
+									<span>{{elevator.name}}</span>
+									<span> -- Floor: </span>
+									<span>{{elevator.location}}</span>
+									<span class="people">
+										<i data-ng-repeat="person in elevator.people" class="personal-icon fa fa-male" style="right:{{10 * $index}}px;" aria-hidden="true"></i>	
+									</span>
+								</div>
+							</section>
+
+							<section class="waiting_area">
+								<h5>
+									Waiting Area
+								</h5>
+								<div class="waiting_area_people">
+									<i data-ng-repeat="person in objBuilding.people" class="personal-icon fa fa-male" style="right:{{10 * $index}}px;" aria-hidden="true"></i>
+								</div>
+
+							</section>
+						</div>
+						
+						<div class="building_requests">
+							Unassigned requests: <br/>
+							<p data-ng-repeat="x in objBuilding.requests">{{x.summary()}}</p>
+
+						</div>
+					</div>					
+				</div>
+			</div>
+
+		</div>
+
+
+		<div id="cache-area"></div>
+	</body>
+</html>

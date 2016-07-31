@@ -1,0 +1,69 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  background: #FFF; }
+
+#container_buildings {
+  display: flex;
+  flex-wrap: wrap; }
+
+.building {
+  margin: 10px auto;
+  padding: 10px;
+  background: #DDD;
+  border: 1px solid gray;
+  display: block; }
+
+.building_main {
+  /* Flexbox Container */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+
+.elevator_shaft {
+  background: #CCC;
+  border: 1px dashed gray;
+  height: 100%;
+  max-width: 40%;
+  min-width: 100px;
+  position: relative;
+  /* Flexbox children (and container?) */
+  display: flex;
+  align-self: flex-end; }
+
+.elevator_car {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid black;
+  text-align: center;
+  padding: 5px;
+  cursor: pointer; }
+  .elevator_car.free {
+    background: #0F9; }
+  .elevator_car.busy {
+    background: #D99; }
+
+.waiting_area {
+  background: white;
+  color: black;
+  border: 1px solid green;
+  padding: 5px;
+  position: relative;
+  display: flex;
+  align-selft: flex-end; }
+
+.waiting_area_people {
+  position: relative;
+  width: 100%;
+  align-self: flex-end; }
+  .waiting_area_people .personal-icon {
+    position: absolute;
+    font-size: 1.25rem;
+    bottom: 0; }
+
+.building_requests {
+  padding: 10px 0; }
+
+/*# sourceMappingURL=styles.css.map */
