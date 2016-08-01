@@ -3,6 +3,9 @@ html, body {
   width: 100%;
   background: #FFF; }
 
+input {
+  padding: 5px; }
+
 #container_buildings {
   display: flex;
   flex-wrap: wrap; }
@@ -21,8 +24,6 @@ html, body {
   justify-content: space-around; }
 
 .elevator_shaft {
-  background: #CCC;
-  border: 1px dashed gray;
   height: 100%;
   max-width: 40%;
   min-width: 100px;
@@ -52,7 +53,8 @@ html, body {
   padding: 5px;
   position: relative;
   display: flex;
-  align-selft: flex-end; }
+  align-selft: flex-end;
+  flex-order: -1; }
 
 .waiting_area_people {
   position: relative;

@@ -17,16 +17,34 @@
 
 		<div class="container-fluid">
 			<div class="row clearfix">
-				<div class="col-md-12">
+				<div class="col-md-2">
 					<h1 class="heading_text">Elevator Distribution Simulator</h1>
 					<p>
 						Let's examine how elevators work, and what algorithms work best in certain
 						situations!
 					</p>
+					<p>
+						To begin, set up the simulation by adjusting the values below as you like.
+					</p>
+					<p>
+						When you are ready, start the simulation!
+					</p>
+
+					<h2>Configuration:</h2>
+					<form>
+						<label>Number of Buildings (1-5):</label><br>
+						<input type="number" name="num_buildings" max="5" min="1" data-ng-bind="objSim.num_buildings" data-ng-model="objSim.num_buildings"><br><br>
+
+						<label>Floors per building (2-20):</label><br>
+						<input type="number" name="num_buildings" max="20" min="2" data-ng-model="objSim.num_floors" data-ng-bind="objSim.num_floors"><br><br>
+
+						<label>Elevators per building (1-5):</label><br>
+						<input type="number" name="num_buildings" max="5" min="1" data-ng-model="objSim.num_elevators" data-ng-bind="objSim.num_elevators"><br><br>
+					</form>
 				</div>
-			</div>
-			<div class="row clearfix">	
-				<div class="col-md-12" id="container_buildings">
+			<!-- </div>
+			<div class="row clearfix" -->>	
+				<div class="col-md-10" id="container_buildings">
 					<div data-ng-repeat="objBuilding in objSim.buildings"
 					class="building">
 						<h3>{{objBuilding.name}}</h3><br/>

@@ -12,6 +12,10 @@ html, body {
     background: $body_color;
 }
 
+input {
+	padding: 5px;
+}
+
 #container_buildings {
 	display: flex;
 	flex-wrap: wrap;
@@ -40,8 +44,8 @@ html, body {
 }
 
 .elevator_shaft {
-	background: $elev_shaft_color;
-	border: 1px dashed gray;
+	// background: $elev_shaft_color;
+	// border: 1px dashed gray;
 	height: 100%;
 	// width requires JS; defined in style="" of template.
 	max-width: 40%; // Aesthetically, this would be too big.
@@ -51,6 +55,7 @@ html, body {
 
 	/* Flexbox children (and container?) */
 	display: flex;
+	order: 2;
 	// flex-grow: 1;
 	align-self: flex-end; // Align to the bottom ground floor.
 
@@ -88,6 +93,7 @@ html, body {
 	// Flexbox stuff.
 	display: flex;
 	align-selft: flex-end;
+	order: 0;
 	// flex-grow: 2;
 }
 .waiting_area_people {

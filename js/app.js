@@ -5,8 +5,8 @@ var sqs$ngapp = '';
 // Some config vars, Namespaced. We can play with these.
 var configs = {};
 configs['num_buildings']		= 3; // How many buildings in this simulation?
-configs['num_floors']			= 100; // How many floors does each(/TODO:Default) building have?
-configs['num_elevators']		= 2; // How many elevators does each(/TODO:Default) building have?
+configs['num_floors']			= 6; // How many floors does each(/TODO:Default) building have?
+configs['num_elevators']		= 3; // How many elevators does each(/TODO:Default) building have?
 configs['time_travel']			= .25; // Time (seconds) taken to travel 1 floor (e.g. from 1-2).
 configs['time_stop']			= 20; // Time (seconds) taken per elevator stop.
 configs['time_base']			= 100; // 1000 = 1 second. Time multiplier. How fast should the simulation run?
@@ -18,8 +18,12 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 	var app = angular.module('elevatorMaster', [] );
 	sqs$ngapp = app;
 
-	app.controller('SimulationController', function($scope, $http) {
+	app.controller('SimulationController', ['$scope', function($scope) {
 		var obj = this;
+
+		obj.num_elevators	= configs['num_elevators'];
+		obj.num_buildings	= configs['num_buildings'];
+		obj.num_floors		= configs['num_floors'];
 
 		// High level, a building is the unit being tested/simulated.
 		// The simulation can compare multiple buildings at once.
@@ -33,11 +37,11 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 			this.algorithm			= algo; // Which algorithm do the elevators here follow?
 			this.score				= 0; // TBA: keep score of how each building does fulfilling requests.
 
-			this.car_height			= 100; // Car height in pixels.
 			this.building_height 	= 500; // Building height in pixels.
 			
 			// And computed values.
-			this.floor_height 		= (this.building_height - this.car_height) / configs['num_floors']; // Floor height in pixels.
+			this.floor_height 		= this.building_height / (configs['num_floors'] - 1); // Floor height in pixels.
+			this.car_height			= this.floor_height; // Car height in pixels.
 
 			// Set up the high-level containers and other building-level vars.
 			$building.elevators		= [];
@@ -47,7 +51,7 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 			// Set up the elevators in this building!
 			var initialize_elevators = function() {
 				var els = [];
-				for(var i = 0 ; i < configs['num_elevators']; i++) {
+				for(var i = 0 ; i < obj.num_elevators; i++) {
 					els[i] = new Elevator("Car_" + i, $building);
 				}
 			}
@@ -205,6 +209,6 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 		initialize();
 
 		return this;
-	});
+	}]);
 
 })();
