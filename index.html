@@ -33,13 +33,21 @@
 					<h2>Configuration:</h2>
 					<form>
 						<label>Number of Buildings (1-5):</label><br>
-						<input type="number" name="num_buildings" max="5" min="1" data-ng-bind="objSim.num_buildings" data-ng-model="objSim.num_buildings"><br><br>
+						<input type="number" name="num_buildings" max="5" min="1"
+						data-ng-bind="objSim.num_buildings" data-ng-model="objSim.num_buildings" data-ng-change="objSim.reInitialize();">
+						<br><br>
 
 						<label>Floors per building (2-20):</label><br>
-						<input type="number" name="num_buildings" max="20" min="2" data-ng-model="objSim.num_floors" data-ng-bind="objSim.num_floors"><br><br>
+						<input type="number" name="num_buildings" max="20" min="2"
+						data-ng-model="objSim.num_floors" data-ng-bind="objSim.num_floors" data-ng-change="objSim.reInitialize();">
+						<br><br>
 
 						<label>Elevators per building (1-5):</label><br>
-						<input type="number" name="num_buildings" max="5" min="1" data-ng-model="objSim.num_elevators" data-ng-bind="objSim.num_elevators"><br><br>
+						<input type="number" name="num_buildings" max="5" min="1"
+						data-ng-model="objSim.num_elevators" data-ng-bind="objSim.num_elevators" data-ng-change="objSim.reInitialize();">
+						<br><br>
+
+						<button data-ng-click="objSim.reInitialize()" class="btn">Restart</button>
 					</form>
 				</div>
 			<!-- </div>
@@ -52,7 +60,7 @@
 							<section class="elevator_shaft" data-ng-repeat="elevator in objBuilding.elevators"
 							style="width:{{70 / objBuilding.elevators.length}}%;">
 								<div id="{{objBuilding.name}}_{{elevator.name}}" class="elevator_car"
-								data-ng-click="objBuilding.distribute_requests();"
+								data-ng-click="objBuilding.distribute_requests(); elevator.move_to_floor(6);"
 								style="height:{{objBuilding.car_height}}px;">
 									<span>{{elevator.name}}</span>
 									<span> -- Floor: </span>

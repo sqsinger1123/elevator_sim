@@ -9,7 +9,7 @@ configs['num_floors']			= 6; // How many floors does each(/TODO:Default) buildin
 configs['num_elevators']		= 3; // How many elevators does each(/TODO:Default) building have?
 configs['time_travel']			= .25; // Time (seconds) taken to travel 1 floor (e.g. from 1-2).
 configs['time_stop']			= 20; // Time (seconds) taken per elevator stop.
-configs['time_base']			= 100; // 1000 = 1 second. Time multiplier. How fast should the simulation run?
+configs['time_base']			= 1000; // 1000 = 1 second. Time multiplier. How fast should the simulation run?
 configs['time_request_cycle']	= 5000; // Time between cycles of new incoming requests. 1000 = 1s.
 
 
@@ -37,11 +37,14 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 			this.algorithm			= algo; // Which algorithm do the elevators here follow?
 			this.score				= 0; // TBA: keep score of how each building does fulfilling requests.
 
-			this.building_height 	= 500; // Building height in pixels.
-			
-			// And computed values.
-			this.floor_height 		= this.building_height / (configs['num_floors'] - 1); // Floor height in pixels.
-			this.car_height			= this.floor_height; // Car height in pixels.
+			this.building_height, this.floor_height, this.car_height;
+
+			this.setup_params = function() {
+				$building.building_height 		= 500; // Building height in pixels.
+				$building.floor_height 			= $building.building_height / (obj.num_floors + 1); // Floor height in pixels.
+				$building.car_height			= $building.floor_height; // Car height in pixels.
+			}
+			$building.setup_params();
 
 			// Set up the high-level containers and other building-level vars.
 			$building.elevators		= [];
@@ -74,7 +77,6 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 				var elev			= $building.elevators[el];
 				elev.add_request(req);
 			}
-			console.log($building);
 		}
 
 		// Class outlines
@@ -199,14 +201,18 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 
 
 		// Start the simulation!
-		var initialize = function() {
+		this.initialize = function() {
 			var buildings = [];
-			for(var i = 0 ; i < configs['num_buildings']; i++) {
+			for(var i = 0 ; i < obj.num_buildings; i++) {
 				buildings[i] = new Building("Building_" + i); // Construct pushes to master-list.
 			}
 		}
+		this.reInitialize = function() {
+			obj.buildings = [];
+			return obj.initialize();
+		}
 
-		initialize();
+		this.initialize();
 
 		return this;
 	}]);
