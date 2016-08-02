@@ -44,7 +44,8 @@ input {
   text-align: center;
   padding: 5px;
   cursor: pointer;
-  z-index: 100; }
+  z-index: 100;
+  flex-grow: 1; }
   .elevator_car.free {
     background: #0F9; }
   .elevator_car.busy {
@@ -54,26 +55,28 @@ input {
   color: black;
   padding: 5px;
   position: relative;
+  width: 20%;
   z-index: 80;
   display: flex;
-  align-selft: flex-end;
-  order: 0; }
-
-.waiting_area_people {
-  position: relative;
-  width: 100%;
-  align-self: flex-end; }
-  .waiting_area_people .personal-icon {
-    position: absolute;
-    font-size: 1.25rem;
-    bottom: 0; }
+  align-self: flex-end;
+  order: 0;
+  flex-grow: 2; }
 
 .floor_section {
   background: #EEE;
   border: 1px solid gray;
   position: absolute;
   width: 100%;
-  z-index: 90; }
+  z-index: 90;
+  display: flex; }
+  .floor_section .waiting_area_people {
+    position: relative;
+    width: 100%;
+    align-self: flex-end; }
+  .floor_section .personal-icon {
+    position: absolute;
+    font-size: 1.25rem;
+    bottom: 5px; }
 
 .floor_section:nth-child(even) {
   background: #DDD; }

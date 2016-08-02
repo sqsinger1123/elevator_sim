@@ -60,7 +60,7 @@
 							<section class="elevator_shaft" data-ng-repeat="elevator in objBuilding.elevators"
 							style="width:{{70 / objBuilding.elevators.length}}%;">
 								<div id="{{objBuilding.name}}_{{elevator.name}}" class="elevator_car"
-								data-ng-click="objBuilding.distribute_requests(); elevator.move_to_floor(6);"
+								data-ng-click="objBuilding.distribute_requests(); elevator.move_to_floor(objSim.num_floors - 1);"
 								style="height:{{objBuilding.car_height}}px;">
 									<span>{{elevator.name}}</span>
 									<span> -- Floor: </span>
@@ -72,18 +72,18 @@
 							</section>
 
 							<section class="waiting_area">
-								<h5>
-									Waiting Area
-								</h5>
-								<div class="waiting_area_people">
-									<i data-ng-repeat="person in objBuilding.people" class="personal-icon fa fa-male" style="right:{{10 * $index}}px;" aria-hidden="true"></i>
-								</div>
+								<p>Waiting area</p>
 
 							</section>
 
 							<section class="floor_section" data-ng-repeat="floor in objBuilding.floors"
 							style="bottom:{{objBuilding.floor_height * floor.floorNum}}px; height:{{objBuilding.floor_height}}px;">
 								<p>{{floor.floorNum}}</p>
+
+								<br><br>
+								<div class="waiting_area_people">
+									<i data-ng-repeat="person in floor.people" class="personal-icon fa fa-male" style="left:{{10 * $index}}px;" aria-hidden="true"></i>
+								</div>
 							</section>
 
 						</div>

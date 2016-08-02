@@ -42,7 +42,7 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 
 			this.setup_params = function() {
 				$building.building_height 		= 500; // Building height in pixels.
-				$building.floor_height 			= $building.building_height / (obj.num_floors + 1); // Floor height in pixels.
+				$building.floor_height 			= $building.building_height / (obj.num_floors); // Floor height in pixels.
 				$building.car_height			= $building.floor_height; // Car height in pixels.
 			}
 			$building.setup_params();
@@ -97,6 +97,8 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 			this.floorNum			= num;
 			this.building			= building;
 
+			this.people 			= [];
+
 			building.floors.push(this);
 			return this;
 		}
@@ -135,9 +137,11 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 			var diff 			= origin - destination;
 			this.direction		= (diff > 0) ? 'down' : 'up';
 
-			this.person			= new Person('Andy', origin, destination, building); 
+			this.person			= new Person('Andy', origin, destination, building);
 
-			building.requests.push(this);
+			var floor = building.floors[origin];
+
+			floor.people.push(this);
 			return this;
 		}
 
@@ -169,7 +173,7 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 
 			// Right now, this just generates a whole bunch of requests.
 			this.generate_starting_requests = function() {
-				for(var i = 10; i < configs['num_floors']; i+=10) {
+				for(var i = 10; i < obj.num_floors; i+=10) {
 					var req = new Request(0,i,$eventLoop.building);
 				}
 			}
@@ -179,8 +183,8 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 			this.generate_random_requests = function() {
 				var num_requests 	= Math.floor(Math.random() * 15) + 1;
 				for(var i = 0; i < num_requests; i++) {
-					var origin 		= Math.floor(Math.random() * configs['num_floors']) + 1;
-					var dest 		= Math.floor(Math.random() * configs['num_floors']) + 1;
+					var origin 		= Math.floor(Math.random() * obj.num_floors);
+					var dest 		= Math.floor(Math.random() * obj.num_floors);
 					if(origin == dest) { continue; }
 					var req 		= new Request(origin,dest, $eventLoop.building);
 				}
@@ -192,7 +196,7 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 
 		// Protos for Elevators
 		Elevator.prototype.move_to_floor = function(new_floor) {
-			if(new_floor < 0 || new_floor > configs['num_floors']) { return false; } // Invalid!
+			if(new_floor < 0 || new_floor > obj.num_floors) { return false; } // Invalid!
 
 			var $elevator = this;
 			var $building = this.building;

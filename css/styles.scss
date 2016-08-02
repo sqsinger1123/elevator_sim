@@ -79,6 +79,7 @@ input {
 	z-index: 100;
 
 	// display: flex;
+	flex-grow: 1;
 
 	&.free {
 		background: $elev_free_color;
@@ -94,25 +95,15 @@ input {
 	color: black;
 	padding: 5px;
 	position: relative;
+	width: 20%;
 
 	z-index: 80;
 
 	// Flexbox stuff.
 	display: flex;
-	align-selft: flex-end;
-	order: 0;
-	// flex-grow: 2;
-}
-.waiting_area_people {
-	position: relative;
-	width: 100%;
 	align-self: flex-end;
-
-	.personal-icon {
-		position: absolute;
-		font-size: 1.25rem;
-		bottom: 0;
-	}
+	order: 0;
+	flex-grow: 2;
 }
 
 .floor_section {
@@ -121,6 +112,20 @@ input {
 	position: absolute;
 	width: 100%;
 	z-index: 90;
+
+	display: flex;
+
+	.waiting_area_people {
+		position: relative;
+		width: 100%;
+		align-self: flex-end;
+	}
+
+	.personal-icon {
+		position: absolute;
+		font-size: 1.25rem;
+		bottom: 5px;
+	}
 }
 .floor_section:nth-child(even) {
 	background: #DDD;
