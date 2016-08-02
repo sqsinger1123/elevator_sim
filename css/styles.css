@@ -18,6 +18,7 @@ input {
   display: block; }
 
 .building_main {
+  position: relative;
   /* Flexbox Container */
   display: flex;
   flex-direction: row;
@@ -27,9 +28,11 @@ input {
   height: 100%;
   max-width: 40%;
   min-width: 100px;
+  margin: 0 5px;
   position: relative;
   /* Flexbox children (and container?) */
   display: flex;
+  order: 2;
   align-self: flex-end; }
 
 .elevator_car {
@@ -40,21 +43,21 @@ input {
   border: 1px solid black;
   text-align: center;
   padding: 5px;
-  cursor: pointer; }
+  cursor: pointer;
+  z-index: 100; }
   .elevator_car.free {
     background: #0F9; }
   .elevator_car.busy {
     background: #D99; }
 
 .waiting_area {
-  background: white;
   color: black;
-  border: 1px solid green;
   padding: 5px;
   position: relative;
+  z-index: 80;
   display: flex;
   align-selft: flex-end;
-  flex-order: -1; }
+  order: 0; }
 
 .waiting_area_people {
   position: relative;
@@ -64,6 +67,16 @@ input {
     position: absolute;
     font-size: 1.25rem;
     bottom: 0; }
+
+.floor_section {
+  background: #EEE;
+  border: 1px solid gray;
+  position: absolute;
+  width: 100%;
+  z-index: 90; }
+
+.floor_section:nth-child(even) {
+  background: #DDD; }
 
 .building_requests {
   padding: 10px 0; }

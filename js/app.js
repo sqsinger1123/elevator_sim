@@ -36,6 +36,7 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 			this.name				= name;
 			this.algorithm			= algo; // Which algorithm do the elevators here follow?
 			this.score				= 0; // TBA: keep score of how each building does fulfilling requests.
+			this.floors				= [];
 
 			this.building_height, this.floor_height, this.car_height;
 
@@ -60,7 +61,17 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 			}
 			initialize_elevators();
 
+			var initialize_floors = function() {
+				floors = [];
+				for(var i = 0; i < obj.num_floors; i++) {
+					floors[i] = new Floor(i, $building);
+				}
+			}
+			initialize_floors();
+
 			this.event_loop			= new EventLoop($building);
+
+			console.log(this);
 
 			obj.buildings.push(this);
 			return this;
@@ -80,6 +91,16 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 		}
 
 		// Class outlines
+		var Floor = function(num, building) {
+			var $floor = this;
+
+			this.floorNum			= num;
+			this.building			= building;
+
+			building.floors.push(this);
+			return this;
+		}
+
 		var Elevator = function(name, building) {
 			this.name			= name;
 			this.requests		= [];

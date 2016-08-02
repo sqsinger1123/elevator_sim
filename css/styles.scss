@@ -37,6 +37,8 @@ input {
 }
 
 .building_main {
+	position: relative;
+	
 	/* Flexbox Container */
 	display: flex;
 	flex-direction: row;
@@ -74,6 +76,8 @@ input {
 	padding: 5px;
 	cursor: pointer;
 
+	z-index: 100;
+
 	// display: flex;
 
 	&.free {
@@ -85,11 +89,13 @@ input {
 }
 
 .waiting_area {
-	background: white;
+	// background: white;
+	// border: 1px solid green;
 	color: black;
-	border: 1px solid green;
 	padding: 5px;
 	position: relative;
+
+	z-index: 80;
 
 	// Flexbox stuff.
 	display: flex;
@@ -107,6 +113,17 @@ input {
 		font-size: 1.25rem;
 		bottom: 0;
 	}
+}
+
+.floor_section {
+	background: #EEE;
+	border: 1px solid gray;
+	position: absolute;
+	width: 100%;
+	z-index: 90;
+}
+.floor_section:nth-child(even) {
+	background: #DDD;
 }
 
 .building_requests {

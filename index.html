@@ -80,6 +80,12 @@
 								</div>
 
 							</section>
+
+							<section class="floor_section" data-ng-repeat="floor in objBuilding.floors"
+							style="bottom:{{objBuilding.floor_height * floor.floorNum}}px; height:{{objBuilding.floor_height}}px;">
+								<p>{{floor.floorNum}}</p>
+							</section>
+
 						</div>
 						
 						<div class="building_requests">
