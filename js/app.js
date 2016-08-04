@@ -71,8 +71,6 @@ configs['time_request_cycle']	= 5000; // Time between cycles of new incoming req
 
 			this.event_loop			= new EventLoop($building);
 
-			console.log(this);
-
 			obj.buildings.push(this);
 			return this;
 		}
